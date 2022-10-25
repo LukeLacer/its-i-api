@@ -6,8 +6,6 @@ from joblib import load
 import pathlib
 import cv2
 import base64
-import io
-from PIL import Image
 
 
 class ImageData(BaseModel):
