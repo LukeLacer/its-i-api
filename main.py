@@ -41,7 +41,15 @@ def guessifitsi(data: ImageData):
         resize_img(img, size),
         size
     )
-    return {"message": str(predict_img(img)[0])}
+    return {"message": str(predict_img(img)[0]), "processedImg": cv2_img_to_b64(img, size)}
+
+
+def cv2_img_to_b64(img, size):
+    sizedImg = np.reshape(img, (size, size))
+    coloredImg = cv2.cvtColor(sizedImg, cv2.COLOR_GRAY2RGB)
+    bytes_img = cv2.imencode('.png', coloredImg)[1]
+    base64_img = base64.b64encode(bytes_img)
+    return base64_img
 
 
 def img_to_bw(img, size):
